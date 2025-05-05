@@ -20,5 +20,6 @@
     "paths": {
       "@/*": ["./*"]
     }
-  }
+  },
+  "include": ["types/*.ts", "src/**/*.ts", "test/**/*.ts", "infra/**/*.yaml"]
 }
