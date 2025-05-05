@@ -19,12 +19,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
-        run: |
-          yarn install
+        run: yarn install
 
-      - name: Run Cypress tests
-        run: |
-          yarn run cypress run
+      - name: Run E2E tests
+        run: yarn test:e2e
