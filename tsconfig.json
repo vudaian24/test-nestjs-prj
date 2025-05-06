@@ -21,5 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["types/*.ts", "src/**/*.ts", "test/**/*.ts", "infra/**/*.yaml"]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "dist", "eslint.config.js"]
 }

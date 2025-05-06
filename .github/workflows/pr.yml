@@ -12,19 +12,22 @@ jobs:
   lint-and-type-check:
     name: Lint & Type Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Set Node.js 20.x
         uses: actions/setup-node@v3
         with:
           node-version: 20.x
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
 
       - name: Install dependencies
         run: |
           yarn install
 
-      - name: Run Type Check
+      - name: Reviewdog - Type Check
         run: |
           yarn type-check
 
