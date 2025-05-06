@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from 'joi'
 
 export const configValidationSchema = Joi.object({
   PORT: Joi.number().default(3000),
@@ -9,4 +9,4 @@ export const configValidationSchema = Joi.object({
   DB_PASSWORD: Joi.string().required(),
   DB_DATABASE: Joi.string().required(),
   JWT_SECRET: Joi.string().required(),
-});
+})

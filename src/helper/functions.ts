@@ -1,4 +1,4 @@
-import { Types, isValidObjectId } from "mongoose"
+import { Types, isValidObjectId } from 'mongoose'
 
 export function toObjectId(value: any, fallbackValue: any = undefined) {
   try {
@@ -10,6 +10,7 @@ export function toObjectId(value: any, fallbackValue: any = undefined) {
     }
     return fallbackValue
   } catch (error) {
+    console.error(error)
     return fallbackValue
   }
 }
