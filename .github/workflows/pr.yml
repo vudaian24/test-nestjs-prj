@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint-and-type-check:
-    name: Lint & Type Check
+    name: Code Quality Check
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,16 +21,25 @@ jobs:
         with:
           node-version: 20.x
 
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
 
       - name: Install dependencies
         run: |
           yarn install
 
-      - name: Reviewdog - Type Check
+      - name: Type Check
         run: |
-          yarn type-check
+          yarn check-types
 
       - name: Run Lint
+        id: eslint
         run: |
-          yarn lint
+          yarn lint --format json --output-file eslint_report.json
+
+      - name: Reviewdog
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ github.token }}
+          eslint_report: eslint_report.json
+          level: error
+          fail_on_error: true
