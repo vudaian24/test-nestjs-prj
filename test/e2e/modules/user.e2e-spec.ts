@@ -2,7 +2,7 @@ import { type NestFastifyApplication } from '@nestjs/platform-fastify'
 import { Test, TestingModule } from '@nestjs/testing'
 import * as request from 'supertest'
 
-import { AppModule } from '../../src/app.module'
+import { AppModule } from '../../../src/app.module'
 
 describe('UserController (e2e)', () => {
   let testApp: NestFastifyApplication
