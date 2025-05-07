@@ -26,12 +26,3 @@ jobs:
 
       - name: Run Lint
         run: yarn lint --format json --output-file eslint_report.json
-
-      - name: Reviewdog
-        uses: reviewdog/action-eslint@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          level: error
-          fail_level: error
-          eslint_flags: '--format json --output-file eslint_report.json'
