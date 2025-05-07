@@ -1,4 +1,4 @@
-name: Pull Request
+name: Lint & Type Check
 
 on:
   pull_request:
@@ -26,21 +26,3 @@ jobs:
 
       - name: Run Lint
         run: yarn lint --format json --output-file eslint_report.json
-
-  e2e-tests:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Run E2E tests
-        run: yarn test:e2e
