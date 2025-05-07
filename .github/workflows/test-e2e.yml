@@ -1,11 +1,5 @@
 name: Run E2E Tests
 
-on:
-  workflow_run:
-    workflows: ['Pull Request']
-    types:
-      - completed
-
 jobs:
   e2e-tests:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
