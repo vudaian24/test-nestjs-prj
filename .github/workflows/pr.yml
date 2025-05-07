@@ -1,44 +1,37 @@
 name: Pull Request
+
 on:
   pull_request:
-    types:
-      - 'opened'
-      - 'synchronize'
-      - 'reopened'
+    types: [opened, synchronize, reopened]
     paths-ignore:
       - 'infra/**'
 
 jobs:
   lint-and-type-check:
-    name: Code Quality Check
+    name: Lint & Type Check
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
     steps:
-      - name: Set Node.js 20.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
-
       - uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Install dependencies
-        run: |
-          yarn install
+        run: yarn install
 
       - name: Type Check
-        run: |
-          yarn check-types
+        run: yarn check-types
 
       - name: Run Lint
-        id: eslint
-        run: |
-          yarn lint
+        run: yarn lint --format json --output-file eslint_report.json
 
       - name: Reviewdog
         uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
           level: error
           fail_level: error
+          eslint_flags: '--format json --output-file eslint_report.json'
